@@ -1,4 +1,5 @@
 import {Page, Logo, Input, Form, ButtonEnter, TextButton} from "./styleds/styleds";
+import { Link } from "react-router-dom";
 
 export default function LoginPage(){
     return(
@@ -15,9 +16,11 @@ export default function LoginPage(){
                 />
             </Form>
             <ButtonEnter isBig={true}>Entrar</ButtonEnter>
-            <TextButton fontsize="14px" underline={true}>
+            <Link to="/cadastro">
+                <TextButton fontsize="14px" underline={true}>
                 Não tem uma conta? Cadastre-se!
-            </TextButton>
+                </TextButton>
+            </Link>
         </Page>
     )
 }
