@@ -2,9 +2,11 @@ import {Page, Logo, Input, Form, ButtonEnter, TextButton} from "./styleds/styled
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "react-loader-spinner";
 import { LoginRequest } from "../Tools/Server";
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
+import UserContext from "./UserContext";
 
-export default function LoginPage({ setToken }){
+export default function LoginPage(){
+    const { setToken, setAndPersistToken } = useContext(UserContext);
     const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -21,6 +23,7 @@ export default function LoginPage({ setToken }){
             LoginRequest(infos)
                 .then(response => {
                     setToken(response.data.token)
+                    setAndPersistToken(response.data.token)
                     navigate('/hoje')
                 })
                 .catch(error => {
