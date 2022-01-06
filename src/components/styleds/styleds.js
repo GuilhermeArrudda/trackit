@@ -34,8 +34,9 @@ const Input = styled.input`
     &:hover{
         filter: brightness(0.9);
     }
-    &:focus{
-        outline: none;
+    &:disable{
+        background-color: #F2F2F2;
+        color: #AFAFAF;
     }
 `
 
@@ -44,14 +45,17 @@ const Form = styled.form`
 `
 
 const ButtonEnter = styled.button`
+    font-family: 'Lexend Deca', sans-serif;
     background-color: #52B6FF;
     color: #FFF;
-    ${props => props.isBig? "width: 303px; height: 45px; margin-bottom: 25px;" : ""};
+    width: 303px;
+    height: 45px;
+    margin-bottom: 25px;
     border-radius: 5px;
     border: none;
     font-size: 21px;
-    &:hover{
-        filter: brightness(0.9);
+    &:disable{
+        opacity: 0.4;
     }
 `;
 
