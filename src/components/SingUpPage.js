@@ -1,8 +1,8 @@
 import { Page, Form, Input, Logo, ButtonEnter, TextButton } from "./styleds/styleds";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "react-loader-spinner";
-import { SingUpRequest } from "../Tools/Server";
-import { useState, useEffect } from "react";
+import { postSingUpRequest } from "../Tools/Server";
+import { useState } from "react";
 
 export default function SingUpPage(){
     let navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function SingUpPage(){
             image,
             password
         }
-        SingUpRequest(infos)
+        postSingUpRequest(infos)
             .then(response => {
                 navigate('/')
             })
