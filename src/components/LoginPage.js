@@ -6,7 +6,7 @@ import { useState, useContext } from "react";
 import UserContext from "./UserContext";
 
 export default function LoginPage(){
-    const { setToken } = useContext(UserContext);
+    const { setUserData } = useContext(UserContext);
     const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -20,20 +20,19 @@ export default function LoginPage(){
             password
         }
 
-            postLoginRequest(infos)
-                .then(response => {
-                    setToken(response.data)
-                    //setAndPersistToken(response.data.token)
-                    navigate('/hoje')
-                })
-                .catch(error => {
-                    if (error.response.status === 422 || error.response.status === 401) {
-                        alert("Dados Invalidos");
-                        return;
-                    }
-                    alert(error);
-                })
-                .finally(() => setIsLoading(false));
+        postLoginRequest(infos)
+            .then(response => {
+                setUserData(response.data)
+                navigate('/hoje')
+            })
+            .catch(error => {
+                if (error.response.status === 422 || error.response.status === 401) {
+                    alert("Dados Invalidos");
+                    return;
+                }
+                alert(error);
+            })
+            .finally(() => setIsLoading(false));
 
 }    
 

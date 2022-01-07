@@ -3,12 +3,12 @@ import UserContext from "./UserContext";
 import { useContext } from "react";
 
 export default function Topo(){
-    const {token} = useContext(UserContext);
+    const {userData} = useContext(UserContext);
 
     return (
         <Header>
             <TrackitLogo>Trackit</TrackitLogo>
-            <Picture src={token.image} alt="Imagem de Perfil"/>
+            <Picture src={userData.image} alt="Imagem de Perfil"/>
         </Header>
     )
 };
@@ -33,6 +33,7 @@ const Picture = styled.img`
     width: 51px;
     height: 51px;
     background-color: #ffffff;
+    object-fit: cover;
 `
 
 const TrackitLogo = styled.h1`

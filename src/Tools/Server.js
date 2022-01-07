@@ -10,7 +10,7 @@ function postSingUpRequest(infos){
     return axios.post(`${BASE_URL}auth/sign-up`, infos)
 }
 
-function getTodayTasks(pass){
+function getTodayData(pass){
     return axios.get(`${BASE_URL}habits/today`, pass)
 }
 
@@ -26,11 +26,21 @@ function postDeleteRequest(id, pass){
     return axios.delete(`${BASE_URL}habits/${id}`, pass);
 }
 
+function postDoneRequest(id, pass){
+    return axios.post(`${BASE_URL}habits/${id}/check`, null, pass);
+}
+
+function postUndoneRequest(id, pass){
+    return axios.post(`${BASE_URL}habits/${id}/uncheck`, null, pass);
+}
+
 export {
     postLoginRequest,
     postSingUpRequest,
-    getTodayTasks,
+    getTodayData,
     getHabitsList,
     postHabit,
-    postDeleteRequest
+    postDeleteRequest,
+    postDoneRequest,
+    postUndoneRequest
 };

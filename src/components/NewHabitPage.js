@@ -1,10 +1,12 @@
-import { TextButton, WeekDays, ButtonDay, Input } from "./styleds/styleds";
+import { TextButton, WeekDays, ButtonDay, Input, ButtonSave } from "./styleds/styleds";
 import { useContext, useState } from "react";
 import styled from "styled-components";
 import UserContext from "./UserContext";
 import { postHabit } from "../Tools/Server";
+import Loader from "react-loader-spinner";
 
 export default function NewHabito ({renderAllHabits, setNewHabitsVisible}) {
+    const {userData} = useContext(UserContext);
     const [weekdays, setWeekdays] = useState([
         {
             name: "D",
@@ -38,7 +40,6 @@ export default function NewHabito ({renderAllHabits, setNewHabitsVisible}) {
 
     const [habitName, setHabitName] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const {token} = useContext(UserContext);
 
     function varSelect(i){
         let newList = [...weekdays];
@@ -47,7 +48,12 @@ export default function NewHabito ({renderAllHabits, setNewHabitsVisible}) {
     }
 
     function saveHabit(){
-        setIsLoading(true)
+
+        if(weekdays.map((day, i) => day.isSelected ? i : -1).filter((index) => index >= 0).lenght === 0){
+            return;
+        }
+
+        setIsLoading(true);
         const infos = {
             name: habitName,
             days: weekdays.map((day, i) => day.isSelected ? i : -1).filter((index) => index >= 0)
@@ -55,7 +61,7 @@ export default function NewHabito ({renderAllHabits, setNewHabitsVisible}) {
 
         const pass = {
             headers: {
-                Authorization: `Bearer ${token.token}`
+                Authorization: `Bearer ${userData.token}`
             }
         }
 
@@ -64,8 +70,14 @@ export default function NewHabito ({renderAllHabits, setNewHabitsVisible}) {
                 renderAllHabits();
                 setNewHabitsVisible(false);
             })
-            .catch(error => alert(error))
-            .finally(setIsLoading(false));
+            .catch(error => {
+                if (error.response.status === 422){
+                    alert("Preencha so campos corretamente");
+                    return;
+                }
+                alert(error)
+            })
+            .finally(() => setIsLoading(false));
 
     }
 
@@ -75,18 +87,24 @@ export default function NewHabito ({renderAllHabits, setNewHabitsVisible}) {
                 placeholder="Qual o hábito"
                 value={habitName}
                 onChange={(e) => setHabitName(e.target.value)}
+                disable={isLoading}
             />
             <WeekDays>
                 {weekdays.map((day, i) => (
                     <ButtonDay 
-                    isSelected={day.isSelected} onClick={() => varSelect(i)}>
-                    {day.name}
+                    isSelected={day.isSelected} 
+                    onClick={() => varSelect(i)}
+                    disabled={isLoading}
+                    >
+                        {day.name}
                     </ButtonDay>
                 ))}
             </WeekDays>
             <Buttonsbox>
-                <TextButton onClick={() => setNewHabitsVisible(false)}>Cancelar</TextButton>
-                <ButtonSave onClick={saveHabit}>Salvar</ButtonSave>
+                <TextButton onClick={() => isLoading ? "" : setNewHabitsVisible(false)}>Cancelar</TextButton>
+                <ButtonSave onClick={saveHabit} disabled={isLoading}>
+                    {isLoading ? <Loader type="ThreeDots" color="#FFF" height={35} width={50} /> : "Salvar"}
+                </ButtonSave>
             </Buttonsbox>
         </NewHabit>
     )
@@ -109,16 +127,3 @@ const Buttonsbox = styled.div`
     justify-content: space-between;
 `;
 
-const ButtonSave = styled.button`
-    font-family: 'Lexend Deca', sans-serif;
-    background-color: #52B6FF;
-    color: #fff;
-    width: 84px;
-    height: 35px;
-    border-radius: 5px;
-    border: none;
-    font-size: 16px;
-    &:disabled{
-        opacity: 0.7;
-    }
-`

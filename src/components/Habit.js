@@ -3,19 +3,24 @@ import { TrashOutline } from 'react-ionicons';
 import UserContext from "./UserContext";
 import { useContext } from "react";
 import { postDeleteRequest } from "../Tools/Server";
+import TodayContext from "./TodayContext";
 
 export default function Habit({ habitData: { id, name, days }, renderAllHabits }) {
     const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"];
-    const {token} = useContext(UserContext);
+    const {userData} = useContext(UserContext);
+    const {todayData, setTodayData} = useContext(TodayContext);
 
     function deleteHabit(){
         const pass = {
             headers: {
-                Authorization: `Bearer ${token.token}`
+                Authorization: `Bearer ${userData.token}`
             }
         }
         postDeleteRequest(id, pass)
-            .then(response => renderAllHabits())
+            .then(response => {
+                setTodayData(todayData.filter((habit) => habit.id !== id))
+                renderAllHabits();
+            })
             .catch(error => alert(error))
     }
 
@@ -26,6 +31,7 @@ export default function Habit({ habitData: { id, name, days }, renderAllHabits }
                 <WeekDays>
                     {weekdays.map((day, i) => (
                         <ButtonDay isSelected={days.includes(i)}>
+                            {day}
                         </ButtonDay>
                     ))}
                 </WeekDays>

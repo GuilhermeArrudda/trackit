@@ -100,26 +100,66 @@ const HabitS = styled.div`
     background-color: #fff;
     margin-bottom: 10px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     border-radius: 5px;
-    padding: 15px;
+    padding: 0 0 0 15px;
     position:relative;
-    & ion-icon{
-        font-size: 69px;
-        margin: 13px;
-        color: #8FC549;
+    p{
+        font-size: 13px;
     }
-`
+`;
+
+const Habits = styled.div`
+    margin-top: 30px;
+    padding: 0 18px;
+    width: 100vw;
+    font-size: 18px;
+    & > p {
+        margin-top: 28px;
+    }
+`;
+
+const HabitsHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 23px;
+    color: #126BA5;
+    margin-bottom: 20px;
+`;
+
+const ButtonSave = styled.button`
+    font-family: 'Lexend Deca', sans-serif;
+    background-color: #52B6FF;
+    color: #fff;
+    width: 84px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    &:disabled{
+        opacity: 0.7;
+    }
+`;
+
+const GreenText = styled.span`
+    color: ${props => props.isGreen ? "#8FC549" : "inherit"};
+`;
 
 export {
     Page,
     Logo,
+    TextButton,
+    GreenText,
     Input,
     Form,
-    ButtonEnter,
-    TextButton,
+    HabitS,
     WeekDays,
+    ButtonEnter,
     ButtonDay,
+    ButtonSave,
+    Habits,
+    HabitsHeader,
     HabitTitle,
-    HabitS
 }

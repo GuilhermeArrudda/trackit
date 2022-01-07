@@ -6,11 +6,11 @@ import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import UserContext from "./UserContext";
 import { useNavigate } from "react-router";
-import { Page } from "./styleds/styleds";
+import { Page, HabitsHeader, Habits } from "./styleds/styleds";
 import { getHabitsList } from "../Tools/Server";
 
 export default function HabitsPage(){
-    const {token} = useContext(UserContext);
+    const {userData} = useContext(UserContext);
     const [habits, SetHabits] = useState([]);
     const [newHabitsVisible, setNewHabitsVisible ] = useState(false);
     let navigate = useNavigate();
@@ -23,7 +23,7 @@ export default function HabitsPage(){
     function renderAllHabits(){
         const pass = {
             headers: {
-                Authorization: `Bearer ${token.token}`
+                Authorization: `Bearer ${userData.token}`
             }
         }
         getHabitsList(pass)
@@ -56,25 +56,6 @@ export default function HabitsPage(){
         </Page>
     )
 }
-
-const Habits = styled.div`
-    margin-top: 30px;
-    padding: 0 18px;
-    width: 100vw;
-    font-size: 18px;
-    p {
-        margin-top: 28px;
-    }
-`;
-
-const HabitsHeader = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 23px;
-    color: #126BA5;
-    margin-bottom: 20px;
-`;
 
 const ButtonAdd = styled.button`
     width: 40px;
