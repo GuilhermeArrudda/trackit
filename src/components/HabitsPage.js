@@ -42,10 +42,11 @@ export default function HabitsPage(){
                     Meus Hábitos
                     <ButtonAdd onClick={() => setNewHabitsVisible(true)}>+</ButtonAdd>
                 </HabitsHeader>
-                {newHabitsVisible ? (<NewHabit
+                <NewHabit
                     renderAllHabits={renderAllHabits}
                     setNewHabitsVisible={setNewHabitsVisible}
-                    />) : ""}
+                    newHabitsVisible={newHabitsVisible}
+                />
                 {habits.length === 0 ? (<p>
                     Você não tem nenhum hábito cadastrado ainda. 
                     Adicione um hábito para começar a trackear!

@@ -42,7 +42,7 @@ export default function SingUpPage(){
     
 
     return(
-        <Page>
+        <Page white>
             <Logo/>
             <Form onSubmit={singup}>
                 <Input 
@@ -72,7 +72,7 @@ export default function SingUpPage(){
                 onChange={(e) => setPassword(e.target.value)} 
                 disabled={isLoading}
                 />
-                <ButtonEnter type="submit" onClick={singup} disable={isLoading}>
+                <ButtonEnter type="submit" disabled={isLoading}>
                     {!isLoading ? "Cadastrar" : <Loader type="ThreeDots" color="#FFF" height={50} width={80} />}
                 </ButtonEnter>
             </Form>    

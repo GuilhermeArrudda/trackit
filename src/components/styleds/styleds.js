@@ -7,9 +7,8 @@ const Page = styled.article`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 70px;
-    background-color: #fff;
-    padding: 70px;
+    background-color: ${props => props.white? "#ffffff": "#f2f2f2"};
+    padding: 70px 0;
     overflow-y: scroll;
 `;
 
@@ -21,8 +20,8 @@ const Logo = styled.div`
 `;
 
 const Input = styled.input`
-    width 303px;
-    height 45px;
+    width: 303px;
+    height: 45px;
     border-radius: 5px;
     border: 1px solid #D5D5D5;
     padding: 0 11px;
@@ -40,7 +39,7 @@ const Input = styled.input`
     &:hover{
         filter: brightness(0.9);
     }
-    &:disable{
+    &:disabled{
         background-color: #F2F2F2;
         color: #AFAFAF;
     }
@@ -63,7 +62,7 @@ const ButtonEnter = styled.button`
     border-radius: 5px;
     border: none;
     font-size: 21px;
-    &:disable{
+    &:disabled{
         opacity: 0.4;
     }
 `;
@@ -111,7 +110,7 @@ const HabitS = styled.div`
 `;
 
 const Habits = styled.div`
-    margin-top: 30px;
+    margin: 30px 0;
     padding: 0 18px;
     width: 100vw;
     font-size: 18px;
@@ -139,7 +138,7 @@ const ButtonSave = styled.button`
     border: none;
     font-size: 16px;
     &:disabled{
-        opacity: 0.7;
+        opacity: 0.4;
     }
 `;
 

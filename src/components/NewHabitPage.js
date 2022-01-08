@@ -2,11 +2,14 @@ import { TextButton, WeekDays, ButtonDay, Input, ButtonSave } from "./styleds/st
 import { useContext, useState } from "react";
 import styled from "styled-components";
 import UserContext from "./UserContext";
+import TodayContext from "./TodayContext";
 import { postHabit } from "../Tools/Server";
 import Loader from "react-loader-spinner";
+import dayjs from "dayjs";
 
-export default function NewHabito ({renderAllHabits, setNewHabitsVisible}) {
+export default function NewHabito ({renderAllHabits, setNewHabitsVisible, newHabitsVisible}) {
     const {userData} = useContext(UserContext);
+    const {todayData, setTodayData} = useContext(TodayContext);
     const [weekdays, setWeekdays] = useState([
         {
             name: "D",
@@ -48,15 +51,15 @@ export default function NewHabito ({renderAllHabits, setNewHabitsVisible}) {
     }
 
     function saveHabit(){
-
-        if(weekdays.map((day, i) => day.isSelected ? i : -1).filter((index) => index >= 0).lenght === 0){
+        if (weekdays.map((day, i) => day.isSelected ? i : -1).filter((index) => index >= 0 ).length === 0){
+            alert("Preencha todas as informações")
             return;
         }
 
         setIsLoading(true);
         const infos = {
             name: habitName,
-            days: weekdays.map((day, i) => day.isSelected ? i : -1).filter((index) => index >= 0)
+            days: weekdays.map((day, i) => day.isSelected ? i : -1).filter((index) => index >= 0 )
         }
 
         const pass = {
@@ -67,6 +70,13 @@ export default function NewHabito ({renderAllHabits, setNewHabitsVisible}) {
 
         postHabit(infos, pass)
             .then(response => {
+                if(response.data.days.includes(dayjs().$W)){
+                    setTodayData([...todayData, response.data]);
+                }
+                setHabitName("");
+                setWeekdays(weekdays.map((day) => {
+                    return {...day, isSelected: false};
+                }));
                 renderAllHabits();
                 setNewHabitsVisible(false);
             })
@@ -82,12 +92,12 @@ export default function NewHabito ({renderAllHabits, setNewHabitsVisible}) {
     }
 
     return(
-        <NewHabit>
+        <NewHabit hidden={!newHabitsVisible}>
             <Input
                 placeholder="Qual o hábito"
                 value={habitName}
                 onChange={(e) => setHabitName(e.target.value)}
-                disable={isLoading}
+                disabled={isLoading}
             />
             <WeekDays>
                 {weekdays.map((day, i) => (
@@ -111,11 +121,12 @@ export default function NewHabito ({renderAllHabits, setNewHabitsVisible}) {
 }
 
 const NewHabit = styled.div`
-    margin-top: 28px;
+    margin: 28px 0 10px 0;
     width: 100%;
     height: 180px;
     padding: 18px;
     background-color: #fff;
+    ${props => props.hidden ? "display: none;": ""}
 `;
 
 const Buttonsbox = styled.div`

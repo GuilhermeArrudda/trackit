@@ -38,7 +38,7 @@ export default function LoginPage(){
 
 
     return(
-        <Page>
+        <Page white> 
             <Logo/>
             <Form onSubmit={login}>
                 <Input
@@ -46,16 +46,16 @@ export default function LoginPage(){
                     type="email"
                     value={email} 
                     onChange={(e) => setEmail(e.target.value)} 
-                    disable={isLoading}
+                    disabled={isLoading}
                 />
                 <Input
                     placeholder="senha"
                     type="password"
                     value={password} 
                     onChange={(e) => setPassword(e.target.value)} 
-                    disable={isLoading}
+                    disabled={isLoading}
                 />
-            <ButtonEnter type="submit"> 
+            <ButtonEnter type="submit" disabled={isLoading}> 
             {!isLoading ? "Entrar" : <Loader type="ThreeDots" color="#FFF" height={50} width={80} />} 
             </ButtonEnter>
             </Form>

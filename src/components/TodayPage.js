@@ -1,7 +1,7 @@
 import Topo from "./Topo"
 import Menu from "./Menu";
 import { Page, HabitsHeader, Habits, GreenText } from "./styleds/styleds"
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router";
 import UserContext from "./UserContext";
 import TodayContext from "./TodayContext";
@@ -35,16 +35,20 @@ export default function TodayPage(){
                 alert(error);
                 navigate("/")
             })
+        console.log(userData.token)
     }
+
 
     function calcPercent() {
         const numberOfHabits = todayData.length;
         const numberOfDones = todayData.filter((habit) => habit.done).length;
+        console.log(numberOfHabits)
+        console.log(numberOfDones)
         return ((numberOfDones * 100) / numberOfHabits).toFixed(0);
     }
 
     return (
-        <Page>
+        <Page white={false}>
             <Topo/>
             <Habits>
                 <HabitsHeader>

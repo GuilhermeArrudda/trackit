@@ -9,8 +9,10 @@ export default function Menu() {
     const { todayData } = useContext(TodayContext);
 
     function calcPercent(){
-        const numberOfHabits = todayData.lenght;
-        const numberOfDones = todayData.filter((habit) => habit.done).lenght;
+        const numberOfHabits = todayData.length;
+        const numberOfDones = todayData.filter((habit) => habit.done).length;
+        console.log(numberOfHabits)
+        console.log(numberOfDones)
         return ((numberOfDones * 100) / numberOfHabits).toFixed(0);
     }
 
@@ -67,6 +69,6 @@ const ButtonToday = styled.div`
 const Txt = styled.span`
     color: #fff;
     position: absolute;
-    left: 25%;
-    top: 35%;
+    left: 27%;
+    top: 37%;
 `

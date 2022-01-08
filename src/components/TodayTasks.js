@@ -1,6 +1,5 @@
 import { HabitS, HabitTitle, GreenText } from "./styleds/styleds";
 import { Checkbox } from "react-ionicons";
-import styled from "styled-components";
 import UserContext from "./UserContext";
 import { useContext, useState } from "react";
 import { postUndoneRequest, postDoneRequest } from "../Tools/Server";

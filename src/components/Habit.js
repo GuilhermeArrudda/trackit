@@ -11,6 +11,9 @@ export default function Habit({ habitData: { id, name, days }, renderAllHabits }
     const {todayData, setTodayData} = useContext(TodayContext);
 
     function deleteHabit(){
+        if (!window.confirm("Desaja mesmo excluir este hábito?")){
+            return;
+        }
         const pass = {
             headers: {
                 Authorization: `Bearer ${userData.token}`
