@@ -1,5 +1,5 @@
-import {Page, Logo, Input, Form, ButtonEnter, TextButton} from "./styleds/styleds";
-import { Link, useNavigate } from "react-router-dom";
+import {Page, Logo, Input, Form, ButtonEnter, TextButton, StyledLink} from "./styleds/styleds";
+import { useNavigate } from "react-router-dom";
 import Loader from "react-loader-spinner";
 import { postLoginRequest } from "../Tools/Server";
 import { useState, useContext } from "react";
@@ -37,6 +37,9 @@ export default function LoginPage(){
 }    
 
 
+
+
+
     return(
         <Page white> 
             <Logo/>
@@ -59,11 +62,11 @@ export default function LoginPage(){
             {!isLoading ? "Entrar" : <Loader type="ThreeDots" color="#FFF" height={50} width={80} />} 
             </ButtonEnter>
             </Form>
-            <Link to="/cadastro">
+            <StyledLink to="/cadastro">
                 <TextButton fontsize="14px" underline={true}>
                 Não tem uma conta? Cadastre-se!
                 </TextButton>
-            </Link>
+            </StyledLink>
         </Page>
     )
 }

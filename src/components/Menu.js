@@ -1,7 +1,6 @@
-import { TextButton } from "./styleds/styleds";
+import { TextButton, StyledLink } from "./styleds/styleds";
 import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import { Link } from "react-router-dom";
 import TodayContext from "./TodayContext";
 import { useContext } from "react";
 
@@ -11,17 +10,15 @@ export default function Menu() {
     function calcPercent(){
         const numberOfHabits = todayData.length;
         const numberOfDones = todayData.filter((habit) => habit.done).length;
-        console.log(numberOfHabits)
-        console.log(numberOfDones)
         return ((numberOfDones * 100) / numberOfHabits).toFixed(0);
     }
 
     return (
         <Footer>
-            <Link to='/habitos'>
+            <StyledLink to='/habitos'>
                 <TextButton>Hábitos</TextButton>
-            </Link>
-            <Link to="/hoje">
+            </StyledLink>
+            <StyledLink to="/hoje">
                 <ButtonToday>
                     <CircularProgressbar
                         value={calcPercent()}
@@ -38,10 +35,10 @@ export default function Menu() {
                     />
                     <Txt>Hoje</Txt>
                 </ButtonToday>
-            </Link>
-            <Link to="/historico">
+            </StyledLink>
+            <StyledLink to="/historico">
                 <TextButton>Histórico</TextButton>
-            </Link>
+            </StyledLink>
         </Footer>
     )
 }

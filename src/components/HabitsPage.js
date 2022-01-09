@@ -21,6 +21,7 @@ export default function HabitsPage(){
 
 
     function renderAllHabits(){
+        
         const pass = {
             headers: {
                 Authorization: `Bearer ${userData.token}`
@@ -66,4 +67,7 @@ const ButtonAdd = styled.button`
     border: none;
     color: #fff;
     font-size: 27px;
+    &:hover {
+        filter: brightness(0.9);
+    } 
 `;

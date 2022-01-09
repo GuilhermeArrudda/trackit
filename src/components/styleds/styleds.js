@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Logoimg from "../../assets/Logo.svg";
+import { Link } from "react-router-dom";
 
 const Page = styled.article`
     width: 100vw;
@@ -65,6 +66,9 @@ const ButtonEnter = styled.button`
     &:disabled{
         opacity: 0.4;
     }
+    &:hover {
+        filter: brightness(0.9);
+    } 
 `;
 
 const TextButton = styled.span`
@@ -86,6 +90,9 @@ const ButtonDay = styled.button`
     width: 30px;
     height: 30px;
     font-size: 20px;
+    &:hover {
+        filter: brightness(0.9);
+    } 
 `;
 
 const HabitTitle = styled.h3`
@@ -140,11 +147,24 @@ const ButtonSave = styled.button`
     &:disabled{
         opacity: 0.4;
     }
+    &:hover {
+        filter: brightness(0.9);
+    } 
 `;
 
 const GreenText = styled.span`
     color: ${props => props.isGreen ? "#8FC549" : "inherit"};
 `;
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    &:hover {
+        filter: brightness(0.9);
+    } 
+    &:focus, &:visited, &:link, &:active {
+    text-decoration: none;
+}
+`
 
 export {
     Page,
@@ -161,4 +181,5 @@ export {
     Habits,
     HabitsHeader,
     HabitTitle,
+    StyledLink,
 }

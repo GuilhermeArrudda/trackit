@@ -1,5 +1,5 @@
-import { Page, Form, Input, Logo, ButtonEnter, TextButton } from "./styleds/styleds";
-import { Link, useNavigate } from "react-router-dom";
+import { Page, Form, Input, Logo, ButtonEnter, TextButton, StyledLink } from "./styleds/styleds";
+import { useNavigate } from "react-router-dom";
 import Loader from "react-loader-spinner";
 import { postSingUpRequest } from "../Tools/Server";
 import { useState } from "react";
@@ -76,11 +76,11 @@ export default function SingUpPage(){
                     {!isLoading ? "Cadastrar" : <Loader type="ThreeDots" color="#FFF" height={50} width={80} />}
                 </ButtonEnter>
             </Form>    
-            <Link to={!isLoading ? "/" : "/cadastro"}>
+            <StyledLink to={!isLoading ? "/" : "/cadastro"}>
                 <TextButton fontsize="14px" underline={true}>
                 Já tenho uma conta? Faça login!
                 </TextButton>
-            </Link>
+            </StyledLink>
             </Page>
     )
 }
