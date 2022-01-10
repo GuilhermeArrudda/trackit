@@ -6,13 +6,19 @@ import TodayPage from "./components/TodayPage";
 import HabitsPage from "./components/HabitsPage";
 import HistoryPage from "./components/HistoryPage";
 import UserContext from "./components/UserContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodayContext from "./components/TodayContext";
 
 export default function App() {
 
     const [userData, setUserData] = useState("");
     const [todayData, setTodayData] = useState([])
+
+    useEffect (() => {
+        const userOnLocalStorage = JSON.parse(localStorage.getItem("userInfo"));
+
+        setUserData(userOnLocalStorage)
+    }, [])
 
     return(
         <UserContext.Provider value ={{userData, setUserData}}>

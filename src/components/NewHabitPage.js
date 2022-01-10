@@ -102,6 +102,7 @@ export default function NewHabito ({renderAllHabits, setNewHabitsVisible, newHab
             <WeekDays>
                 {weekdays.map((day, i) => (
                     <ButtonDay 
+                    key={i}
                     isSelected={day.isSelected} 
                     onClick={() => varSelect(i)}
                     disabled={isLoading}

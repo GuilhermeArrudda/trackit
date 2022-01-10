@@ -33,7 +33,10 @@ export default function Habit({ habitData: { id, name, days }, renderAllHabits }
                 <HabitTitle>{name}</HabitTitle>
                 <WeekDays>
                     {weekdays.map((day, i) => (
-                        <ButtonDay isSelected={days.includes(i)}>
+                        <ButtonDay 
+                        key={i}
+                        isSelected={days.includes(i)}
+                        >
                             {day}
                         </ButtonDay>
                     ))}

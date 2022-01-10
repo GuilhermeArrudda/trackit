@@ -34,6 +34,10 @@ function postUndoneRequest(id, pass){
     return axios.post(`${BASE_URL}habits/${id}/uncheck`, null, pass);
 }
 
+function getHistory (pass){
+    return axios.get(`${BASE_URL}habits/history/daily`, pass);
+}
+
 export {
     postLoginRequest,
     postSingUpRequest,
@@ -42,5 +46,6 @@ export {
     postHabit,
     postDeleteRequest,
     postDoneRequest,
-    postUndoneRequest
+    postUndoneRequest,
+    getHistory,
 };

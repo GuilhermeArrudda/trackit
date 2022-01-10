@@ -2,7 +2,7 @@ import {Page, Logo, Input, Form, ButtonEnter, TextButton, StyledLink} from "./st
 import { useNavigate } from "react-router-dom";
 import Loader from "react-loader-spinner";
 import { postLoginRequest } from "../Tools/Server";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import UserContext from "./UserContext";
 
 export default function LoginPage(){
@@ -10,7 +10,15 @@ export default function LoginPage(){
     const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate();
+    let navigate = useNavigate();
+
+    useEffect (() => {
+        if (localStorage.getItem("userInfo") !== null){
+
+            navigate("/hoje")
+        }
+        // eslint-disable-next-line
+    }, [])
 
     function login(e){
         e.preventDefault();
@@ -23,6 +31,7 @@ export default function LoginPage(){
         postLoginRequest(infos)
             .then(response => {
                 setUserData(response.data)
+                localStorage.setItem("userInfo", JSON.stringify(response.data))
                 navigate('/hoje')
             })
             .catch(error => {
@@ -34,7 +43,7 @@ export default function LoginPage(){
             })
             .finally(() => setIsLoading(false));
 
-}    
+    }  
 
 
 

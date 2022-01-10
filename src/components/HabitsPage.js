@@ -17,6 +17,7 @@ export default function HabitsPage(){
 
     useEffect(() => {
         renderAllHabits();
+        // eslint-disable-next-line
     }, [])
 
 
@@ -51,7 +52,7 @@ export default function HabitsPage(){
                 {habits.length === 0 ? (<p>
                     Você não tem nenhum hábito cadastrado ainda. 
                     Adicione um hábito para começar a trackear!
-                    </p>) : habits.map((habitData) => <Habit habitData={habitData} renderAllHabits={renderAllHabits}/>)}
+                    </p>) : habits.map((habitData, id) => <Habit key={id} habitData={habitData} renderAllHabits={renderAllHabits}/>)}
             </Habits>
             <Menu/>
 

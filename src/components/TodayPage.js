@@ -1,7 +1,7 @@
 import Topo from "./Topo"
 import Menu from "./Menu";
 import { Page, HabitsHeader, Habits, GreenText } from "./styleds/styleds"
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import UserContext from "./UserContext";
 import TodayContext from "./TodayContext";
@@ -13,13 +13,17 @@ import styled from "styled-components";
 
 
 export default function TodayPage(){
+    const [reload, setReload] = useState(false)
     const {userData} = useContext(UserContext);
     const {todayData, setTodayData} = useContext(TodayContext);
     let navigate = useNavigate();
     
     useEffect(() => {
+        setReload(false)
+        
         renderAllTodayHabits();
-    }, [])
+        // eslint-disable-next-line
+    }, [reload])
 
     function renderAllTodayHabits() {
         const pass = {
@@ -32,7 +36,7 @@ export default function TodayPage(){
                 setTodayData(response.data)
             })
             .catch(error => {
-                alert(error);
+                alert("Você já está logando");
                 navigate("/")
             })
     }
@@ -60,7 +64,7 @@ export default function TodayPage(){
                     </div>
 
                 </HabitsHeader>
-                {todayData.map(taskData => <TodayTasks taskData={taskData} renderAllTodayHabits={renderAllTodayHabits}/>)}
+                {todayData.map((taskData, id) => <TodayTasks key={id} taskData={taskData} renderAllTodayHabits={renderAllTodayHabits}/>)}
             </Habits>
             <Menu/>
         </Page>
