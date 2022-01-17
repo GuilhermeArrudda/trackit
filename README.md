@@ -1,10 +1,20 @@
-# Getting Started with Create React App
+# Descrição
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Esse projeto foi criado com a intenção de ajudar as pessoas a executarem seus hábitos no dia a dia. Nele podemos nos cadastrar e fazer login para conseguirmos salvar nossos hábitos, também possui telas como um calendário que permite que o usuário consiga ver em quais dias deixou de cumprir o hábito e na tela principal temos um contador que marca seus recordes de dias seguidos cumprindo o hábito em questão.
 
-## Available Scripts
+## Linguagens e Ferramentas
 
-In the project directory, you can run:
+<p>
+<img src ="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
+<img src="https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white"/>
+<img src="https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/>
+<img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
+<p>
+  
+### Deploy
+- A aplicação está disponível para uso através da plataforma Vercel:
+  <br>
+  <a href = "track-it-self.vercel.app"><img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" target="_blank"></a>
 
 ### `npm start`
 
